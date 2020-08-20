@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+
+class ListNode
+{
+	public:
+		int val;
+		ListNode *next;
+
+};
+
+
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+{
+	if (l1 == NULL) return l2;
+	if (l2 == NULL) return l1;
+	
+	int carry, sum;
+	ListNode* result;
+	
+
+	while (l1 || l2 || carry){
+
+		sum = (l1 ? l1 -> val : 0) + (l2 ? l2 -> val : 0) + carry;
+		carry = sum / 10;
+		result -> val = new ListNode (sum % 10);
+		result = result -> next;
+		l1 = l1 ? l1 -> next : NULL;
+		l2 = l2 ? l2 -> next : NULL;
+
+	}
+}
+
+
+void insert (ListNode** head_ref, int data)
+{
+	ListNode* node = new ListNode();
+
+	node -> val = data;
+	node -> next = NULL;
+
+	*head_ref = node;
+}
+
+
+int main()
+{
+
+	ListNode *a = new ListNode();
+	insert(&a, 3);
+	insert(&a, 4);
+	insert(&a, 2);
+
+        ListNode *b = new ListNode ();
+        insert(&b, 4);
+        insert(&b, 6);
+        insert(&b, 5);
+
+	ListNode *c  = addTwoNumbers(a , b);
+
+	while (c != NULL)
+	{
+	    cout << " " << c -> val;
+	}
+
+ return 0;
+}
+

@@ -1,0 +1,49 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+
+
+bool isValid(string s)
+{
+	stack <char> str;
+
+	for (char c: s)
+	{
+		if (c == '{' || c == '(' || c == '[')
+		{
+			str.push(c);
+		}
+		else
+		{
+			if (str.empty()) return false;
+			if (c == '}' && str.top() != '{') return false;
+			if (c == ']' && str.top() != '[') return false;
+			if (c == ')' && str.top() != '(') return false;
+			str.pop();
+		}
+
+	}
+
+
+	if (str.empty()) return true;
+
+	return false;
+}
+
+
+
+int main()
+{
+	string s;
+
+	cout << "Enter the paranthesis \n";
+	cin >> s;
+
+
+	cout << "Is the Paranthesis valid ? \n" << isValid(s) <<endl;
+
+
+	return 0;
+}
+

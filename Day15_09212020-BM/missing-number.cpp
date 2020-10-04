@@ -9,6 +9,15 @@ int missingNumber(vector<int>& nums)
 
 	for (int i = 0; i < nums.size(); i++)
 	{
+	   /* Xor has following properties
+                1. XOR ing the number by itself will result into 0.
+                2. XOR the number with 0 will result into same number 
+                3. XOR follows commutative and associative properties , which means if we can re-order our XOR operations in
+                anyway we want will result in same value.
+                
+                So, as we know it doesnt matter how we XOR the number as long as we XOR 2 of the same number it will result in 0.
+                Eventually we will XOR 0 with the missing number which will result in same number.
+            */
 		result ^= i ^ nums[i];
 	}
 	

@@ -6,24 +6,34 @@ using namespace std;
 
 vector<int> twoSums (vector<int>& nums , int target)
 {
-	vector<int> result;
-	unordered_map<int , int> hash;	
-	int numx = 0;
-
-	for (int i = 0; i < nums.size(); i++)
-	{
-		numx = target - nums[i];
-
-		if (hash.find(numx) != hash.end())
-		{
-			result.push_back(hash[numx]);
-			result.push_back(i);
-		}
-
-		hash[nums[i]] = i;
-	}
-	
-	return result;
+        // create vector to store the results
+        vector<int> result;
+        
+        // create an unordered_map , one to store the value of the arr and other to store the position 
+        unordered_map<int , int> L;
+        
+        for (int i = 0; i < nums.size(); i++)
+        {
+            // put the value of other value to search in vector in numx
+            int numx = target - nums[i];
+            
+            // find the value of numx in map L , if found before we reach the end of the map
+            if (L.find(numx) != L.end())
+            {
+                // save the position of numx that was found 
+                result.push_back(L[numx]);
+                
+                //save the position of current value used to find numx
+                result.push_back(i);
+            }
+            
+            // save the position of nums[i] in the map, so the key is nums[i] and value is i which is position of nums[i]
+            L[nums[i]] = i;
+            
+        }
+        
+        
+        return result;
 }
 
 

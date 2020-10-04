@@ -5,37 +5,37 @@ using namespace std;
 
 vector<int> singleNumber(vector<int>& nums)
 {
-	vector<int> result;
-	int xorVal = nums.front();
-
-
-	for (int i = 1; i < nums.size(); i++)
-		xorVal ^= nums[i];
-
-
-	cout << "\nXorVal is " << xorVal << endl;
-
-	int bit = xorVal & ~(xorVal - 1);
-	cout << "\nbit is " << bit << endl;
-	
-	int num1 = 0, num2 = 0;
-
-	for (int num: nums)
-	{
-		if ((num & bit) > 0)
-		{
-			num1 ^= num;
-		}
-		else
-		{
-			num2 ^= num;
-		}
-	}
-
-	result.push_back(num1);
-	result.push_back(num2);
-
-	return result;
+        vector<int> result;
+        int num1 = 0, num2 = 0;
+        
+        // save the 1st element in XorVal
+        int XorVal = nums.front();
+        
+        // get the one number which helps to distinguish A and B
+        for (int i = 1; i < nums.size(); i++)
+        {
+            XorVal ^= nums[i];
+        }
+        
+        // To find the one bit that will help us distinguish between A and B
+        int bits = XorVal & (~(XorVal - 1));
+        
+        for (int num: nums)
+        {
+            if ((num & bits) > 0)
+            {
+                num1 ^= num;
+            }
+            else
+            {
+                num2 ^= num;
+            }
+        }
+        
+        result.push_back(num1);
+        result.push_back(num2);
+        
+        return result;
 }
 
 

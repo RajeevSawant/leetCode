@@ -6,20 +6,24 @@ using namespace std;
 
 int strStr(string haystack, string needle)
 {
-	int m = haystack.size(), n = needle.size();
-
-	for (int i = 0; i <= (m - n); i++)
-	{
-		int j = 0;
-		for (; j < n; j++)
-		{
-			if (haystack[i + j] != needle[j])
-				break;
-		}
-		if (j == n) return i;
-	}
-	
-	return -1;
+        int m = haystack.length(), n = needle.length(); 
+        
+        // i <= (m - n) is if both the needle and the haystack are empty then, it should return 0.
+        for (int i = 0; i <= (m - n); i++)
+        {
+            int j = 0;
+            for (; j < n; j++)
+            {
+                // compare haystack with needle if the values dont match then break
+                if (haystack[i + j] != needle[j])
+                    break;
+            }
+            
+            // if J == n meaning all the values of needle match to haystack 
+            if (j == n) return i;
+        }
+        
+        return -1;
 }
 
 

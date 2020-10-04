@@ -4,23 +4,26 @@ using namespace std;
 
 int maxArea(vector<int>& height)
 {
-	int lo = 0, hi = height.size() - 1, maxValue = INT_MIN;
-
-	while (lo < hi)
-	{
-		maxValue = max(maxValue, max(maxValue, (hi - lo)*min(height[hi], height[lo])));
-
-		 if (height[lo] < height[hi])
-		 {
-			lo++;
-		 }
-		 else
-		 {
-			hi--;
-		 }
-	}
-	
-	return maxValue;
+        // Get the lo and hi of the bars 
+        int lo = 0, hi = height.size() - 1, maxvalue = INT_MIN;
+        
+        while (lo < hi)
+        {
+            // you can hi , lo which are the x-axis and then have height[hi], height[lo] which are the Y-axis 
+            maxvalue = max(maxvalue , (hi - lo)*min(height[hi], height[lo]));
+            
+            // if the height of lo position is less than of hi position, then move lo forward 
+            if (height[lo] < height[hi])
+            {
+                lo++;
+            }
+            else
+            {
+                hi--;
+            }
+        }
+        
+        return maxvalue;
 }
 
 

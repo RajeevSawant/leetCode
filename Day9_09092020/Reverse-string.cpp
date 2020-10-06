@@ -6,18 +6,24 @@ using namespace std;
 
 void reverseString(char* S, int sSize)
 {
-	int lo = 0, hi = sSize - 1;
-	char temp;
-
-	while (lo < hi)
-	{
-		temp = S[lo];
-		S[lo] = S[hi];
-		S[hi] = temp;
-
-		lo++; hi--;
-	}
-
+        // So that we can swap values starting from extreme end 
+        int lo = 0, hi = s.size() - 1;
+        
+        // Need temp to store the value temporarly 
+        char temp;
+        
+        // Loop until lo is less than hi , when lo is equal to hi loop stops as we have reached the middle of the loop
+        while (lo < hi)
+        {
+            // store the value present at pos lo to temp 
+            temp = s[lo];
+            
+            //copy the value stored at hi pos in lo pos and increment lo 
+            s[lo++] = s[hi];
+            
+            //copy temp character to hi pos and decrement hi pos
+            s[hi--] = temp;
+        }
 }
 
 void printString (char* s, int sSize)

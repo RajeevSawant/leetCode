@@ -40,34 +40,47 @@ We keep track of longestPalindromeStart, longestPalindromeLength for the final o
 
 string longestPalindrome(string s)
 {
-	//Corner cases
-	if (s.length() <= 1) return s;
-
-
-	int len = s.length(), longestPalindromeStart = 0, longestPalindromeLength = 1;
-
-	bool state[len][len];
-
-	for (int i = 0; i < len; i++)
-		state[i][i] = true;
-
-	
-	 for (int i = len - 1; i >= 0; i--) 
-	 {
-            for (int dist = 1; dist < len - i; dist++) 
-	    {
-		    int j = dist + i;
-		    state[i][j] = (dist == 1) ? (s[i] == s[j]) : (s[i] == s[j]) && state[i + 1][j - 1];
-
-		    if (state[i][j] && j - i + 1 > longestPalindromeLength)
-		    {
-			longestPalindromeLength = j - i + 1;
-			longestPalindromeStart = i;
-		    }
-	     }
-          }
-
-		return s.substr(longestPalindromeStart, longestPalindromeStart + longestPalindromeLength - 1);	 
+        // if the length is already less than 1 meaning no element or equal to 1 meaning 1 element , return string itself.
+        if (s.length() <= 1) return s;
+        
+        // initialize all the varaible , longestPalindromicLength is 1 , since we have skiped the 1st check so we know the 
+        // minimum length of the string is more than 1.
+        int len = s.length(), longestPalindromeStart = 0, longestPalindromeLength = 1;
+        
+        // create a state table 
+        bool state[len][len];
+        
+        
+        // mark all the values as true
+        for (int i = 0; i < len; i++)
+            state[i][i] = true;
+        
+        
+        for(int i = len - 1; i >= 0; i--)
+        {
+            for(int dist = 1; dist < len - i; dist++)
+            {
+                // Imagine a 2D matrix , i being the row and j being the col
+                int j = dist + i;
+                
+                // dist == 1 meaning the last param of the 2D matrix and we are comparing the value by itself
+                // so if s = "aa" , then s[start] = s[end] and start + dist = end, in this case dist is 1.
+                // if the dist is greater than 1 , then value of state[rowp][colp] would be true if s[rowp i.e start] == s[colp i.e                     end]
+                // and the values bet them should all be palindromic or true i.e state[start + 1][end - 1]
+                state[i][j] = (dist == 1) ? (s[i] == s[j]) : (s[i] == s[j]) && state[i + 1][j - 1];
+                
+                
+                if (state[i][j] && j - i + 1 > longestPalindromeLength)
+                {
+                    longestPalindromeLength = j - i + 1;
+                    longestPalindromeStart = i;
+                }
+                
+            }
+        }
+        
+        
+        return s.substr(longestPalindromeStart, longestPalindromeLength); 
 
 }
 

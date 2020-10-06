@@ -4,15 +4,20 @@ using namespace std;
 
 uint32_t reverseBits (uint32_t n)
 {
-	uint32_t m;
+        uint32_t m;
 
-	for (int i = 0; i < 32; i++, n >>= 1)
-	{
-		m <<= 1;
-		m |= n & 1;
-	}
-	
-	return m;
+        // if you do this only until n exist then the last elements wont be populated with 0 in the result.
+        // Make sure you shift the n
+        for (int i = 0; i < 32; i++, n >>= 1)
+        {
+            // We want to shift the m once every loop to move the bit ahead.
+            m <<= 1;
+
+            // We check if the bit position of n is 1 or not , if it is then or with m and result is stored in m.
+            m |= n & 0x01;
+        }
+
+        return m;
 }
 
 

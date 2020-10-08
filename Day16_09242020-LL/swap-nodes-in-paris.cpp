@@ -12,18 +12,23 @@ class ListNode
 };
 
 
-ListNode* swapPairs(ListNode* head)
-{
-	
-	if (!head || !(head -> next)) return head;
-
-	ListNode* temp = head -> next;
-	head -> next = swapPairs(temp -> next);
-	temp -> next = head;
-
-	return temp;
+ListNode* swapPairs(ListNode* head) {
+        
+        // if head or head -> next doesnt exits then return head
+        if(!(head) || !(head -> next)) return head;
+        
+        // create a temp node , pointing to head -> next
+        ListNode* temp = head -> next;
+        
+        // call recursively to the last element and point the end of last element which NULL to the head -> next
+        head -> next = swapPairs(temp -> next);
+        
+        // Point the second last element as the next of last element
+        temp -> next = head;
+        
+        // the second last element.
+        return temp;
 }
-
 
 void Cnode(ListNode** head_ref, int data)
 {

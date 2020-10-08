@@ -14,42 +14,56 @@ class ListNode
 
 
 
-
-ListNode*  mergeTwoLists(ListNode* l1,  ListNode* l2)
-{
-	ListNode dummy, *result = &dummy;
-
-	while (l1 && l2)
-	{
-		if (l1 -> val < l2 -> val)
-		{
-			result -> next = new ListNode(l1 -> val);
-			l1 = l1 ? l1 -> next : NULL;
-		}
-		else
-		{
-			result -> next = new ListNode(l2 -> val);
-			l2 = l2 ? l2 -> next : NULL;
-		}
-		result = result -> next;
-	}
-
-
-	if (l1)
-	{
-		result -> next = l1; 
-	}
-
-	if (l2)
-	{
-		result -> next = l2;
-	}
-
-
-	return dummy.next;
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        
+        if (!(l1)) return l2;
+        if (!(l2)) return l1;
+        
+        // create a dummy List to return the head
+        ListNode dummy, *result = &dummy;
+        
+        // loop around the list only until both l1 and l2 exits 
+        while (l1 && l2)
+        {
+            // if value in l1 is less, than it would be first in the list
+            if (l1 -> val < l2 -> val)
+            {
+                // save value of l1 to result
+                result -> next = new ListNode(l1 -> val);
+                
+                // move l1 to next element
+                l1 = l1 -> next;
+            }
+            else
+            {
+                // value of node in l1 is less than value of node in l2
+                
+                // save value of l2 to result 
+                result -> next = new ListNode (l2 -> val);
+                
+                // move l2 to next element
+                l2 = l2 -> next;
+            }
+            
+            // move result
+            result = result -> next;
+        }
+        
+    
+        if (l1)
+        {
+            // if there are still some values left in l1 then append those to the result
+            result -> next = l1;
+        }
+        
+        if (l2)
+        {
+            // if there are still some values left in l2 then append those to the result
+            result -> next = l2;
+        }
+        
+        return dummy.next;
 }
-
-
 
 
 void Cnode(ListNode** head_ref, int data)

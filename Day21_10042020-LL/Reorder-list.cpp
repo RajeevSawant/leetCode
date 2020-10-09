@@ -12,40 +12,60 @@ class ListNode
 };
 
 
-void reorderList(ListNode** head)
-{
-	if (!(*head) || !((*head) -> next) || !((*head) -> next -> next)) return;
-
-
-	stack<ListNode*> my_stack;
-
-	ListNode* ptr = (*head);
-	int size = 0;
-
-	while(ptr != NULL)
-	{
-		my_stack.push(ptr);
-		size++;
-		ptr = ptr -> next;
-	}
-
-
-	ListNode* pptr = (*head);
-
-	// Between every two nodes insert the one in the top of the stack
-	for (int j = 0; j < size/2; j++)
-	{
-		ListNode* element = my_stack.top();
-		my_stack.pop();
-		element -> next = pptr -> next;
-		
-		pptr -> next = element;
-		pptr = pptr -> next -> next;
-	}
-
-	pptr ->  next = NULL;
+void reorderList(ListNode* head) {
+        
+        // We atleast need 3 elements to reoder 
+        if (!(head) || !(head -> next) || !(head -> next -> next)) return;
+        
+        
+        // Put all the elements in stack
+        stack<ListNode*> my_stack;
+        
+        
+        // create a node linking to head to start saving the value in stack.
+        ListNode* ptr = (head);
+        
+        
+        // create a size element to save the length of the list
+        int size = 0;
+        
+        
+        // while the ptr exist , keep saving the values in stack and moving ahead
+        while (ptr)
+        {
+            // save the elements in stack
+            my_stack.push(ptr);
+            
+            // save the size of the stack
+            size++;
+            
+            // move ptr ahead 
+            ptr = ptr -> next;
+        }
+        
+        
+        ListNode* pptr = head;
+        
+        for (int i = 0; i < size/2; i++)
+        {
+            // create a new node and store top of the stack to this node
+            ListNode* element = my_stack.top();
+            
+            // pop the top as the value is already been used
+            my_stack.pop();
+            
+            // point the element -> next to what ever the head -> next is pointing 
+            element -> next = pptr -> next;
+            
+            // point the pptr -> next to element
+            pptr -> next = element;
+            
+            // jump pptr 2 steps ahead
+            pptr = pptr -> next -> next;
+        }
+        
+        pptr -> next = NULL;
 }
-
 
 void Cnode(ListNode** head_ref, int data)
 {

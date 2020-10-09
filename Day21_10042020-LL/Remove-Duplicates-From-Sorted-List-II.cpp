@@ -20,40 +20,56 @@ When skipping over the duplicate nodes with out deallocating them as well the me
  *
  */
 
-ListNode* deleteDuplicates(ListNode* head)
-{
-	if (head == NULL || head -> next == NULL) return head;
+ ListNode* deleteDuplicates(ListNode* head) {
+        
+        // if head or head -> next doesnt exits 
+        if (head == NULL || head -> next == NULL) return head;
+        
+        // Create a dummyHead to return the head at the end
+        ListNode dummyHead(0); dummyHead.next = head;
+        
+        // Create a current node pointing to head, create a prev node which is going to be modified anyway.
+        ListNode* cur = head; ListNode* prev = &dummyHead;
+        
+        // Until cur or cur -> next exist 
+        while(cur && cur -> next)
+        {
+            
+            // if cur -> val is equal to cur -> next -> val
+            if (cur -> val == cur -> next -> val)
+            {
+                // store the cur value in duplicate
+                int duplicate = cur -> val;
+                
+                // if cur exist and cur value is equal to duplicate
+                while (cur && cur -> val == duplicate)
+                {
+                    // make cur -> next equal to prev -> next
+                    prev -> next = cur -> next;
+                    
+                    // delete the current item
+                    delete cur;
+                    
+                    // make the prev -> next as cur item.
+                    cur = prev -> next;
+                }
+            }
+            else
+            {
+                // copy the cur to prev
+                prev = cur;
+                
+                // move cur ahead
+                cur = cur -> next;
+            }
+            
+        }
+        
+        // return the dummyhead.next item
+        return dummyHead.next;
+        
+ }
 
-	ListNode dummyHead(0); dummyHead.next = head;
-	ListNode* cur = head; ListNode* prev = &dummyHead;
-
-	
-	while(cur && cur -> next)
-	{
-		
-		if (cur -> val == cur -> next -> val)
-		{
-			int duplicate = cur -> val;
-
-			while (cur && cur -> val == duplicate)
-			{
-				prev -> next = cur -> next;
-				delete cur;
-				cur = prev -> next;
-			}
-
-		}
-		else
-		{
-			prev = cur;
-			cur = cur -> next;
-		}
-
-	}
-
-	return dummyHead.next;
-
-}
 
 void Cnode(ListNode** head_ref, int data)
 {

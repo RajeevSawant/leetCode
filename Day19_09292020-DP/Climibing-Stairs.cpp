@@ -12,21 +12,30 @@ That said , steps[n]=steps[n-1]+steps[n-2].
 In another word, the number of distinct ways to reach level n is the sum of number of distinct ways to reach level n-1 and n-2.
  *
  */
-int climbStairs(int n)
-{
-	vector<int> steps(n , 0);
-	steps[0] = 1;
-	steps[1] = 2;
 
-
-	for (int i = 2; i < n; i++)
-	{
-		steps[i] = steps[i - 2] + steps[i - 1];
-	}
-
-	return steps[n - 1];
+int climbStairs(int n) {
+        
+        // if n is 1
+        if (n == 1) return 1;
+        
+        //if n is 2
+        if (n == 2) return 2;
+        
+        // Initialize the vector 
+        vector<int> steps(n , 0);
+        
+        // initilaize the 1st and 2nd step
+        steps[0] = 1;
+        steps[1] = 2;
+        
+        for (int i = 2; i < n; i++)
+        {
+            steps[i] = steps[i - 2] + steps[i - 1];
+        }
+        
+        // return the last element
+        return steps[n - 1];
 }
-
 
 int main()
 {

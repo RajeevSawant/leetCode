@@ -16,24 +16,34 @@ struct ListNode
 
 ListNode* deleteDuplicates(ListNode* head)
 {
-
-	ListNode* cur = head;
-
-	while(cur && cur -> next)
-	{
-		if (cur -> val == cur -> next -> val)
-		{
-			ListNode* temp = cur -> next;
-			cur -> next = cur -> next -> next;
-			delete temp;
-		}
-		else
-		{
-			cur = cur -> next;
-		}
-	}
-
-	return head;
+        // create a local node
+        ListNode* cur = head;
+        
+        // loop until cur and cur -> next exist 
+        while(cur && cur -> next)
+        {
+            // check if the current element is equal to the next element            
+            if(cur -> val  == cur -> next -> val)
+            {
+                // create temp to store the next node which has the same val as current node 
+                ListNode* temp = cur -> next;
+                
+                // Move to the next node 
+                cur -> next = cur -> next -> next;
+                
+                //delete the temp node
+                delete temp;
+            }
+            else
+            {
+                // Move ahead only when the values are different
+                cur = cur -> next;
+            }
+            
+        }
+        
+        // return the head as it stays intact
+        return head;
 }
 
 

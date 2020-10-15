@@ -3,28 +3,31 @@
 using namespace std;
 
 
-int searchInsert(vector<int>& nums, int target)
-{
-	int start = 0, end = nums.size() - 1, mid = 0;
-
-	while (start < end)
-	{
-		mid = (start + end) / 2;
-
-		if (nums[mid] >= target)
-		{
-			end = mid;
-		}
-		else
-		{
-			start = mid + 1;
-		}
-
-	}
-
-	return start;
+int searchInsert(vector<int>& nums, int target) {
+        
+        // get the low and high indexes of the vector 
+        // Fails if the hi is nums.size() - 1, and the target is larger than largest number in vector
+        int lo = 0, hi = nums.size(), mid = 0;
+        
+        // lo is less than hi
+        while(lo < hi)
+        {
+            // get the mid index of the vector
+             mid = (lo + hi)/2;
+            
+            // meaning target is in lower range 
+            if (nums[mid] >= target)
+            {
+                hi = mid;
+            }
+            else if (nums[mid] < target)   // meaning target is in higher range 
+            {
+                lo = mid + 1;
+            }
+        }
+        
+        return lo;
 }
-
 
 int main()
 {

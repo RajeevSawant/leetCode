@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+using namespace std;
+
+
+string simplifyPath(string path)
+{
+	string res, tmp;
+	vector<string> stk;
+
+	stringstream ss(path);
+
+	while(getline(ss, tmp, '/'))
+	{
+		if (tmp == "" || tmp ==".") continue;
+		if (tmp == ".." && !stk.empty()) stk.pop_back();
+		else if (tmp != "..") stk.push_back(tmp);
+	}
+	
+	for (auto str: stk) res += "/" + str;
+
+	return res.empty() ? "/" : res;
+}
+
+
+
+int main()
+{
+	string inp;
+	cout << "Enter the string \n";
+	cin >> inp;
+
+	string res = simplifyPath(inp);
+
+	cout << "The result is " << res << endl;
+	return 0;
+}
+

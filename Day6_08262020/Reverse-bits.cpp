@@ -2,24 +2,23 @@
 using namespace std;
 
 
-uint32_t reverseBits (uint32_t n)
-{
-        uint32_t m;
-
-        // if you do this only until n exist then the last elements wont be populated with 0 in the result.
-        // Make sure you shift the n
+    uint32_t reverseBits(uint32_t n) {
+        
+        uint32_t m = 0;
+        
+        // go to from bit 0 to bit 31, shift n to the left by 1 after loop
         for (int i = 0; i < 32; i++, n >>= 1)
         {
-            // We want to shift the m once every loop to move the bit ahead.
+            // shift to the right by 1
             m <<= 1;
-
-            // We check if the bit position of n is 1 or not , if it is then or with m and result is stored in m.
+            
+            // what ever the bit value of n is present or it with m 
             m |= n & 0x01;
         }
-
+        
+        // return m
         return m;
-}
-
+    }
 
 
 int main()

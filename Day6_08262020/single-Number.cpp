@@ -3,23 +3,18 @@
 using namespace std;
 
 
-int SingleNumber (vector<int>& nums)
-{
-        int single = 0;
+    int singleNumber(vector<int>& nums) {
         
-        // Traverse throughout the list
+        int result = 0;
+        
         for (int i = 0; i < nums.size(); i++)
         {
-            // XOR follows the principle of commutative and associative 
-            // XOR of 2 same numbers is always zero
-            // XOR of any number with 0 is the same number
-            // since the res would be the only single number, we get the output as the result.
-            single ^= nums[i];
+            // XOR of the 2 same number is always 0
+            result ^= nums[i];
         }
         
-        return single;
-
-}
+        return result;
+    }
 
 int main()
 {

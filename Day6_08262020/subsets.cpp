@@ -3,38 +3,36 @@
 using namespace std;
 
 
-void subset(vector<vector<int>>& res , int i, vector<int>& sub, vector<int>& nums)
-  {
-        // store the single array in 2D array
-        res.push_back(sub);
+    void subset(vector<vector<int>>& result, vector<int>& sub, int i, vector<int>& nums)
+    {
+        // store the result
+        result.push_back(sub);
         
-        // Go through the loops 
+        // go through the loop
         for (int j = i; j < nums.size(); j++)
         {
-            // add the values in sub
+            // push every element
             sub.push_back(nums[j]);
             
-            // Call the subset again
-            subset(res, j+1, sub, nums);
+            // call subset again to move to next element
+            subset(result, sub, j + 1, nums);
             
-            // remove elements
+            //remove elements 
             sub.pop_back();
         }
     }
     
-vector<vector<int>>subsets(vector<int>& nums) 
-{        
-        // use to result 
-        vector<vector<int> > result;
-        
-        //use to store temperory 
-        vector<int> sub;
     
-        // call the subsets func
-        subset(result, 0, sub, nums);
+    vector<vector<int>> subsets(vector<int>& nums) {
+        
+        vector<vector<int>> result;
+        vector<int> sub;
+        
+        subset(result, sub, 0, nums);
         
         return result;
- }
+    }
+
 
 int main()
 {

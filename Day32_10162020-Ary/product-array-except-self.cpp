@@ -3,30 +3,57 @@
 using namespace std;
 
 
-vector<int> productExceptSelf(vector<int>& nums)
-{
-	int n = nums.size();
-	int fromBegin = 1;
-	int fromLast = 1;
+/*
+    
+    Given numbers [2, 3, 4, 5], regarding the third number 4, the product of array except 4 is 235 which consists of two parts: left 23 and right 5. The product is leftright. We can get lefts and rights:
 
-	vector<int> res(n , 1);
+Numbers:     2    3    4     5
+Lefts:            2  2*3 2*3*4
+Rights:  3*4*5  4*5    5      
+Let’s fill the empty with 1:
 
-	for (int i = 0; i < n; i++)
-	{
-		res[i] *= fromBegin;
-		fromBegin *= nums[i]; 
-	}
+Numbers:     2    3    4     5
+Lefts:       1    2  2*3 2*3*4
+Rights:  3*4*5  4*5    5     1
+We can calculate lefts and rights in 2 loops. The time complexity is O(n).
 
-
-	for (int i = n - 1; i >= 0; i--)
-	{
-		res[i] *= fromLast;
-		fromLast *= nums[i];
-	}
-
-	return res;
-}
-
+Copy from Someone explanation
+    
+    
+*/
+    
+    vector<int> productExceptSelf(vector<int>& nums) {
+        
+        // get the max values
+        int n = nums.size();
+        
+        // to muliply the value from begining
+        int fromBegin = 1;
+        
+        // to multiply the value from last
+        int fromLast = 1;
+        
+        // store the result , size should be same as input array size , initiliaze all the values to 1
+        vector<int> res(n , 1);
+        
+        
+        for (int i = 0; i < n; i++)
+        {
+            
+            res[i] *= fromBegin;
+            fromBegin *= nums[i];
+        }
+        
+        
+        for (int i = n - 1; i >= 0; i--)
+        {
+            res[i] *= fromLast;
+            fromLast *= nums[i];
+        }
+        
+        return res;
+        
+    }
 
 
 int main()

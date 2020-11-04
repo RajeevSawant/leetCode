@@ -3,30 +3,35 @@
 using namespace std;
 
 
-bool isOneBitCharacter(vector<int>& bits)
-{
-	int flag = 0;
-
-	for (int i = 0; i < bits.size();)
-	{
-		if (bits[i] == 1)
-		{
-			i+=2;
-			flag = 0;
-		}
-		else
-		{
-			i++;
-			flag = 1;
-		}
-	}
-
-	if (flag)
-	    return true;
-
-	return false;
-}
-
+    bool isOneBitCharacter(vector<int>& bits) {
+        
+        // Initialize flag
+        int flag = 0;
+        
+        // Go from 0 to bits.size()
+        for (int i = 0; i < bits.size();)
+        {
+            // if 1st element is 1 then its a two bit so incr i by 2
+            if (bits[i] == 1)
+            {
+                i += 2;
+                flag = 0;
+            }
+            else
+            {
+                // In this case its a 1 bit 
+                i++;
+                flag = 1;
+            }
+        }
+        
+        // if the flag is 1 then its true 
+        if (flag)
+            return true;
+        
+        // else its false
+        return false;
+    }
 
 
 

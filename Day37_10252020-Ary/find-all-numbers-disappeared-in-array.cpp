@@ -4,33 +4,40 @@
 using namespace std;
 
 
-vector<int> findDisappearedNumbers(vector<int>& nums)
-{
-	int nums_size = nums.size();
-	map <int , int> hash;
-	vector<int> result;
-
-
-	for (int i = 0; i < nums_size; i++)
-	{
-		hash[nums[i]] = nums[i];
-	}
-
-	for (int j = 0; j < nums.size(); j++)
-	{
-		
-		if (hash.find(j + 1) != hash.end())
-		{
-			continue;
-		}
-		else
-		{
-			result.push_back(j + 1);
-		}
-	}
-
-	return result;
-}
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        
+        // get the size of the inp vector
+        int num_size = nums.size();
+        
+        // initialize the result
+        vector<int> result;
+        
+        // use hash-table
+        map<int , int> hash;
+        
+        
+        for (int a : nums)
+        {
+            hash[a] = a;
+        }
+        
+        
+        for (int i = 0; i < num_size; i++)
+        {
+            // if found then skip the loop
+            if (hash.find(i + 1) != hash.end())
+            {
+                continue;
+            }
+            else
+            {
+                // if not found means missing 
+                result.push_back(i + 1);
+            }
+        }
+        
+        return result;
+    }
 
 int main()
 {

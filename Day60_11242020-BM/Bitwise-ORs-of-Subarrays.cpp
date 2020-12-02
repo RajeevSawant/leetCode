@@ -56,3 +56,25 @@ In each line t, for any two numbers t[i] and t[j] (i < j), t[i] must have more 1
 The complexity is O(kN), where k is a constant depends on the bitwise length of input numbers. (32 in this problem)
 
  */
+
+
+// ONLY C++ output possible
+int subarrayBitwiseORs(vector<int>& A)
+{
+	unordered_set<int> s;
+	set<int> t, r;
+
+	for (int i : A)
+	{
+		r = {i};
+		for (int j : t) r.insert(i | j);
+
+		t = r;
+		for (int j : t) s.insert(j);
+	}
+
+	return s.size();
+}
+
+// Time complexitiy would be O(kN) k depends on the bitwise length, which is 32 in current case.
+

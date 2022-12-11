@@ -44,12 +44,11 @@ ListNode* reverseBetween (ListNode* head , int m , int n)
 
 	preHead.next = head;
 
-
 	n -= m;
 
 	while (--m)
 	{
-	 pre = pre -> next;	
+	   pre = pre -> next;	
 	}
 
 	ListNode* pStart = pre -> next;
